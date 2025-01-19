@@ -1,8 +1,9 @@
 version: "3.8"
+
 services:
   user-service:
     build:
-      context: ./user-service
+      context: ./microservices-app/user-service
     ports:
       - "3000:3000"
     networks:
@@ -10,7 +11,7 @@ services:
 
   product-service:
     build:
-      context: ./product-service
+      context: ./microservices-app/product-service
     ports:
       - "3001:3001"
     networks:
@@ -18,7 +19,7 @@ services:
 
   order-service:
     build:
-      context: ./order-service
+      context: ./microservices-app/order-service
     ports:
       - "3002:3002"
     networks:
@@ -26,15 +27,15 @@ services:
 
   gateway-service:
     build:
-      context: ./gateway-service
+      context: ./microservices-app/gateway-service
     ports:
       - "3003:3003"
-    networks:
-      - app-network
     depends_on:
       - user-service
       - product-service
       - order-service
+    networks:
+      - app-network
 
 networks:
   app-network:
